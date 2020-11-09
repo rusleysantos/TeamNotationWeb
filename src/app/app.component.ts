@@ -5,6 +5,7 @@ import { LoginService } from './services/login.service'
 import { MessageReturn } from './models/message-return'
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
     password: new FormControl("")
   });
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private cookieService: CookieService) { }
   ngOnInit() { }
 
   loginUser() {
@@ -29,7 +30,12 @@ export class AppComponent implements OnInit {
       login.Password = this.loginForm.value.password,
 
       this.loginService.LoginUser(login).subscribe((tokenReturn: MessageReturn) => {
+        debugger;
         this.messageReturn = tokenReturn;
+        
+        if(this.messageReturn.status){
+          this.cookieService.set('TOKEN_USER',this.messageReturn.description);
+        }
       });
   }
 
