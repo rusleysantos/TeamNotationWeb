@@ -6,3 +6,9 @@
     display: flex;
     align-items: center;
   }
+
+  body{
+
+    background: rgb(252, 251, 251);
+    background-color: linear-gradient(360deg, rgba(157,150,150,1) 0%, rgba(216,215,215,1) 10%, rgba(255,255,255,1) 100%);
+} 

@@ -1,0 +1,32 @@
+<div class="row justify-content-center vertical-cente" style="margin-top: 12%">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-header">
+              Team Notation - Login
+            </div>
+            <div class="card-body">
+           
+                <form [formGroup]="loginForm">
+                    <input class="form-control" placeholder="Usuario" type="text" formControlName="username"
+                        id="username" />
+
+                    <input class="form-control" placeholder="Senha" type="password" formControlName="password"
+                        id="password" />
+                </form>
+
+                <div *ngIf="showMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{messageReturn.title}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <button (click)="loginUser()" class="form-control btn-primary" title="Entrar"
+                    style="margin-top: 16px;">Entrar</button>
+            </div>
+            <div class="card-footer text-muted">
+                <a href="#">Criar Nova Conta</a>
+            </div>
+          </div>
+    </div>
+</div>
