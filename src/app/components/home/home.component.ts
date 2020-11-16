@@ -15,12 +15,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.cookieService.get('TOKEN_USER');
 
-    debugger;
     if (this.token == "" || this.token == null) {
       this.router.navigate(['/login']);
     }
- 
-
   }
 
 }

@@ -26,25 +26,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUser() {
+  loginUser(): void {
 
     const login = new Login;
-    login.Username = this.loginForm.value.username,
-      login.Password = this.loginForm.value.password,
-  
-      this.loginService.LoginUser(login).subscribe((tokenReturn: MessageReturn) => {
+    login.Username = this.loginForm.value.username;
+    login.Password = this.loginForm.value.password;
+
+    this.loginService.LoginUser(login).subscribe((tokenReturn: MessageReturn) => {
+
+      this.messageReturn = tokenReturn;
+
+      if (this.messageReturn.status) {
+        this.cookieService.set('TOKEN_USER', this.messageReturn.description);
+        this.showMessage = false;
         debugger;
-        this.messageReturn = tokenReturn;
-  
-        if (this.messageReturn.status) {
-          this.cookieService.set('TOKEN_USER', this.messageReturn.description);
-          this.showMessage = false;
-          this.router.navigate(['/home']);
-        }
-        else {
-          this.showMessage = true;
-        }
-      });
+        this.router.navigate(['/home']);
+      }
+      else {
+        this.showMessage = true;
+      }
+    });
   }
 
 }
