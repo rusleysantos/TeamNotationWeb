@@ -1,7 +1,7 @@
 export class MessageReturn {
 
-    Title : string;
-    Description  : string;
-    Status  : boolean;
-    ObjectsReturn : any;
+    title : string;
+    description  : string;
+    status  : boolean;
+    objectsReturn : any;
 }

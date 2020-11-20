@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   messageReturn: any;
   showMessage = false;
+  showLogin = true;
 
   loginForm = new FormGroup({
     username: new FormControl(""),
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
       if (this.messageReturn.status) {
         this.cookieService.set('TOKEN_USER', this.messageReturn.description);
         this.showMessage = false;
-        debugger;
+
         this.router.navigate(['/home']);
       }
       else {

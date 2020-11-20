@@ -8,20 +8,20 @@ import { Project } from '../models/project';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectOptionsService {
+export class ProjectService {
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
+
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
                                'Authorization': `Bearer ${this.cookieService.get('TOKEN_USER')}`,
                               }),
   }
 
-
-  getProjectOptions(): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>('/api/GetProjectOptions', this.httpOptions);
+  addProject(project: Project): Observable<MessageReturn> {
+    return this.httpClient.post<MessageReturn>('/api/AddProject', project, this.httpOptions);
   }
-
 
 }

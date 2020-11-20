@@ -1,6 +1,6 @@
 export class Project {
     idProject: number
-    Title: string
-    Description: string
-    PercentDone: number
+    title: string
+    description: string
+    percentDone: number
 }

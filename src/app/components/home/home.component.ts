@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +6,10 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  token: any;
 
-  constructor(private cookieService: CookieService, private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.token = this.cookieService.get('TOKEN_USER');
-
-    if (this.token == "" || this.token == null) {
-      this.router.navigate(['/login']);
-    }
   }
 
 }

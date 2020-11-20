@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { MessageReturn } from 'src/app/models/message-return';
 import { Project } from 'src/app/models/project';
 import { ProjectOptionsService } from 'src/app/services/project-options.service';
+
+
 
 @Component({
   selector: 'app-project-options',
@@ -12,38 +16,25 @@ import { ProjectOptionsService } from 'src/app/services/project-options.service'
 export class ProjectOptionsComponent implements OnInit {
 
   listOptions: any;
-  ProjectForm = new FormGroup({
-    title: new FormControl(""),
-    description: new FormControl("")
-  });
 
-  constructor(private projectService: ProjectOptionsService) { }
+  constructor(private projectService: ProjectOptionsService, private router: Router) { }
 
   ngOnInit(): void {
 
-    //this.getProjectService();
+    this.getProjectService();
   }
 
   getProjectService(): void {
-
+debugger;
     this.projectService.getProjectOptions().subscribe((returnOptions: MessageReturn) => {
-      this.listOptions = returnOptions.ObjectsReturn;
+      this.listOptions = returnOptions.objectsReturn;
     });
 
   }
 
-  addProject(): void {
-    debugger;
-
-    const project = new Project;
-
-    project.Title = this.ProjectForm.value.title;
-    project.Description = this.ProjectForm.value.description;
-
-    this.projectService.addProject(project).subscribe((projectReturn: MessageReturn) => {
-
-    });
-
+  redirectProject(): void {
+debugger;
+    this.router.navigate([{outlets: {primary: 'project' ,sidebar: 'project'}}]);
   }
 
 }

@@ -2,7 +2,8 @@
     <a class="dropdown-item" href="#">Action</a>
     <a class="dropdown-item" href="#">Another action</a>
     <hr>
-    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">
+    <a class="dropdown-item" [routerLink]="['/home',{outlets:{'content':['project'] }}]" data-toggle="modal"
+        data-target="#staticBackdrop">
         <svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-plus-square" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 2px;">
             <path fill-rule="evenodd"
@@ -14,36 +15,3 @@
     </a>
 </div>
 
-<!-- Inicio modal cadastro projeto -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Adicionar Projeto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form [formGroup]="ProjectForm">
-
-                    <label for="title">Título:</label>
-                    <input formControlName="title" class="form-control" placeholder="Título" type="text" id="title" />
-
-                    <label for="description">Descrição:</label>
-                    <textarea formControlName="description" class="form-control" id="description" cols="30" rows="10"></textarea>
-
-                </form>
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button (click)="addProject()" type="button" class="btn btn-primary">Salvar</button>
-            </div>
-
-        </div>
-    </div>
-</div>

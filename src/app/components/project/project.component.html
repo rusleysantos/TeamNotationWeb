@@ -1,0 +1,25 @@
+<div class="justify-content-center" style="margin-top: 1%">
+    <div class="col-md-12">
+
+        <div class="card ">
+            <div class="card-header">
+                Projeto
+            </div>
+            <div class="card-body">
+
+                <form [formGroup]="ProjectForm">
+
+                    <label for="title">Título:</label>
+                    <input formControlName="title" class="form-control" placeholder="Título" type="text" id="title" required>
+
+                    <label for="description">Descrição:</label>
+                    <textarea formControlName="description" class="form-control" id="description" cols="30"
+                        rows="10"></textarea>
+
+                </form>
+                <hr>
+                <button (click)="addProject()" type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
