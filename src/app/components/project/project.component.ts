@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageReturn } from 'src/app/models/message-return';
 import { Project } from 'src/app/models/project';
 import { ProjectService } from 'src/app/services/project.service';
@@ -17,7 +18,7 @@ export class ProjectComponent implements OnInit {
     description: new FormControl("")
   });
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -38,7 +39,7 @@ export class ProjectComponent implements OnInit {
           '',
           'success'
         )
-
+        this.router.navigate(['/home']);
       }
       else{
 

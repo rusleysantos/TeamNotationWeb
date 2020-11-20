@@ -25,16 +25,10 @@ export class ProjectOptionsComponent implements OnInit {
   }
 
   getProjectService(): void {
-debugger;
     this.projectService.getProjectOptions().subscribe((returnOptions: MessageReturn) => {
       this.listOptions = returnOptions.objectsReturn;
     });
 
-  }
-
-  redirectProject(): void {
-debugger;
-    this.router.navigate([{outlets: {primary: 'project' ,sidebar: 'project'}}]);
   }
 
 }
