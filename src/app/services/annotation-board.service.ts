@@ -1,18 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { MessageReturn } from '../models/message-return';
-import { Project } from '../models/project';
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class ProjectService {
+export class AnnotationBoardService {
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
-
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,8 +19,8 @@ export class ProjectService {
     }),
   }
 
-  addProject(project: Project): Observable<MessageReturn> {
-    return this.httpClient.post<MessageReturn>('/api/AddProject', project, this.httpOptions);
+  GetProject(idProject: string): Observable<MessageReturn> {
+    return this.httpClient.get<MessageReturn>(`/api/GetProject/?idProject=${idProject}`, this.httpOptions);
   }
 
 }

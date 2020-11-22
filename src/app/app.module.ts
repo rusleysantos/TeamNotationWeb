@@ -1,17 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { CookieService } from 'ngx-cookie-service';
+import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
+import { AppComponent } from './app.component';
 import { ProjectOptionsComponent } from './components/project-options/project-options.component';
 import { ProjectComponent } from './components/project/project.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
+import { AnnotationBoardComponent } from './components/annotation-board/annotation-board.component';
+import { TaskBoardComponent } from './components/task-board/task-board.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -22,13 +24,16 @@ import { HomeComponent } from './components/home/home.component';
     ProjectComponent,
     NavBarComponent,
     HomeComponent,
+    AnnotationBoardComponent,
+    TaskBoardComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

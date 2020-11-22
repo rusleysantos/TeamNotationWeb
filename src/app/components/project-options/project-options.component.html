@@ -1,5 +1,5 @@
 <div class="dropdown-menu" aria-labelledby="dropdown08">
-        <a *ngFor="let item of listOptions; let i = index" class="dropdown-item" href="#">#{{item.idProjectOption}} <strong>{{item.title}}</strong> - Feito: {{item.percentDone}}%</a>
+        <p *ngFor="let item of listOptions; let i = index" class="dropdown-item" (click)="redirectAnnotationBoard(item.idProjectOption)" href="">#{{item.idProjectOption}} <strong>{{item.title}}</strong> - Feito: {{item.percentDone}}%</p>
     <hr>
     <a class="dropdown-item" [routerLink]="['/home',{outlets:{'content':['project'] }}]" data-toggle="modal"
         data-target="#staticBackdrop">

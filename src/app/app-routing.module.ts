@@ -5,13 +5,13 @@ import { AppModule } from './app.module';
 import { LoginComponent } from './components/login/login.component';
 import { ProjectComponent } from './components/project/project.component';
 import { HomeComponent } from './components/home/home.component';
+import { AnnotationBoardComponent } from './components/annotation-board/annotation-board.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
   },
-
   {
     path: 'home',
     component: HomeComponent,
@@ -19,6 +19,11 @@ const routes: Routes = [
       {
         path: 'project',
         component: ProjectComponent,
+        outlet: 'content'
+      },
+      {
+        path: 'annotationboard',
+        component: AnnotationBoardComponent,
         outlet: 'content'
       }
     ]

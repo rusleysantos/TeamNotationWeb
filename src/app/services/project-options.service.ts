@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { MessageReturn } from '../models/message-return';
-import { Project } from '../models/project';
 
 @Injectable({
   providedIn: 'root'

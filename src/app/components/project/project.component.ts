@@ -1,6 +1,9 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { CookieService } from 'ngx-cookie-service';
 import { MessageReturn } from 'src/app/models/message-return';
 import { Project } from 'src/app/models/project';
 import { ProjectService } from 'src/app/services/project.service';
@@ -18,12 +21,13 @@ export class ProjectComponent implements OnInit {
     description: new FormControl("")
   });
 
-  constructor(private projectService: ProjectService, private router: Router) { }
+  constructor(private projectService: ProjectService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
   }
 
   addProject(): void {
+
 
     const project = new Project;
 
@@ -33,15 +37,27 @@ export class ProjectComponent implements OnInit {
 
     this.projectService.addProject(project).subscribe((projectReturn: MessageReturn) => {
 
-      if(projectReturn.status){
+      if (projectReturn.status) {
         Swal.fire(
           projectReturn.title,
           '',
           'success'
         )
-        this.router.navigate(['/home']);
+
+        this.cookieService.set('PROJECT_SELECT', projectReturn.objectsReturn)
+
+        this.router.navigate(['/home', {
+          outlets: {
+            'content': ['annotationboard']
+          }
+        }
+        ])
+        .then(() => {
+          window.location.reload();
+        });
+
       }
-      else{
+      else {
 
         Swal.fire(
           projectReturn.title,
