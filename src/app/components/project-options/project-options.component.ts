@@ -34,7 +34,7 @@ export class ProjectOptionsComponent implements OnInit {
 
   redirectAnnotationBoard(idProject: string): void {
 
-    debugger;
+    this.cookieService.delete('PROJECT_SELECT');
     this.cookieService.set('PROJECT_SELECT', idProject);
 
     this.router.navigate(['/home', {
