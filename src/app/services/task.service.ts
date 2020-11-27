@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { MessageReturn } from '../models/message-return';
@@ -8,7 +7,7 @@ import { MessageReturn } from '../models/message-return';
 @Injectable({
   providedIn: 'root'
 })
-export class AnnotationBoardService {
+export class TaskService {
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
@@ -19,8 +18,8 @@ export class AnnotationBoardService {
     }),
   }
 
-  GetProject(idProject: string): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`/api/GetProject/?idProject=${idProject}`, this.httpOptions);
+  getTasksProject(idProject: number, page: number, size: number): Observable<MessageReturn> {
+    return this.httpClient.get<MessageReturn>(`/api/GetTasksProject?idProject=${idProject}&page=${page}&size=${size}`, this.httpOptions);
   }
 
 }
