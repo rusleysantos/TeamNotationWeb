@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +15,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AnnotationBoardComponent } from './components/annotation-board/annotation-board.component';
 import { TaskBoardComponent } from './components/task-board/task-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 @NgModule({
   declarations: [
@@ -33,7 +33,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DragDropModule
+    
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

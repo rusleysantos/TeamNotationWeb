@@ -1,62 +1,132 @@
-<h1 style="font-size: 44px" class="text-center"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-table"
-        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
-    </svg>&ensp; Quadro de Tarefas</h1>
+<h1 style="font-size: 37px" class="text-center"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-table"
+    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd"
+      d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
+  </svg>&ensp; Quadro de Tarefas</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-       
-        </tr>
-    </thead>
-    <tbody>
+<div class="row justify-content-center">
+  <button (click)="openModal('addTask')" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-success"> <svg
+      width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-square" fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+      <path fill-rule="evenodd"
+        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+    </svg> Adicionar</button>
+</div>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titulo</th>
+      <th scope="col">Descrição</th>
+    </tr>
+  </thead>
 
-        <tr>
-            <td colspan="3">
+  <tbody *ngIf="!emptyTask">
 
-                <div class="row justify-content-center">
+    <tr *ngFor="let item of listTaks; let i = index">
 
-                    <div class="col-md-1 text-center">
-                        <div><strong>#</strong></div>
-                        <div>1</div>
-                    </div>
+      <td>
+        {{ item.idTask }}
+      </td>
 
-                    <div class="col-md-5 text-center">
-                        <div><strong>Titulo</strong></div>
-                        <div>ddd ddd dd d</div>
-                    </div>
+      <td>
+        {{ item.title }}
+      </td>
 
-                    <div class="col-md-5 text-center">
-                        <div><strong>Descrição</strong></div>
-                        <div>ddd ddd dd d</div>
-                    </div>
+      <td>
+        {{ item.description }}
+      </td>
 
-                </div>
+    </tr>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <svg width="1.0625em" height="1em" viewBox="0 0 17 16" class="bi bi-exclamation-triangle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M7.938 2.016a.146.146 0 0 0-.054.057L1.027 13.74a.176.176 0 0 0-.002.183c.016.03.037.05.054.06.015.01.034.017.066.017h13.713a.12.12 0 0 0 .066-.017.163.163 0 0 0 .055-.06.176.176 0 0 0-.003-.183L8.12 2.073a.146.146 0 0 0-.054-.057A.13.13 0 0 0 8.002 2a.13.13 0 0 0-.064.016zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
-                            <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
-                          </svg>
-                    </div>
-                    <div class="col-md-4">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
-                          </svg>
-                    </div>
+  </tbody>
 
-                    <div class="col-md-4">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                          </svg>
-                    </div>
-                </div>
-            </td>
-        </tr>
+  <tbody *ngIf="emptyTask">
 
-    </tbody>
+    <tr>
+      <td colspan="3">
+        <div class="row justify-content-center">
+          <div class="alert alert-secondary" role="alert">
+            Sem tarefas até o momento!
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
 
 </table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-top: 9px;padding-bottom: 0px;">
+        <h1 class="modal-title h4" id="exampleModalLgLabel">Tarefa</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="taskForm">
+
+
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label for="title">Titulo:</label>
+              <input class="form-control" placeholder="Titulo" type="text" formControlName="title" id="title" />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label for="weight">Peso:</label>
+              <input class="form-control" placeholder="Peso" type="number" formControlName="weight" id="weight" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="effort">Esforço:</label>
+              <input class="form-control" placeholder="Esforço" type="number" formControlName="effort" id="effort" />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label for="status">Status:</label>
+              <select formControlName="status" class="form-control" id="status">
+                <option *ngFor="let item of listStatus; let i = index" value="{{item.idStatus}}">{{item.description}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label for="attachments">Anexo:</label>
+              <input class="form-control" placeholder="Esforço" type="file" formControlName="attachments"
+                id="attachments" />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label for="description">Descrição</label>
+              <textarea class="form-control" formControlName="description" id="description" cols="4"
+                rows="6"></textarea>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button (click)="addTaskProject()" type="submit" class="btn btn-primary">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,10 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 import { MessageReturn } from 'src/app/models/message-return';
-import { Project } from 'src/app/models/project';
-import { ProjectOptionsService } from 'src/app/services/project-options.service';
-
-
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-options',
@@ -18,14 +15,14 @@ export class ProjectOptionsComponent implements OnInit {
 
   listOptions: any;
 
-  constructor(private projectService: ProjectOptionsService, private router: Router, private cookieService: CookieService) { }
+  constructor(private projectService: ProjectService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit(): void {
 
-    this.getProjectService();
+    this.getProjectOptions();
   }
 
-  getProjectService(): void {
+  getProjectOptions(): void {
     this.projectService.getProjectOptions().subscribe((returnOptions: MessageReturn) => {
       this.listOptions = returnOptions.objectsReturn;
     });

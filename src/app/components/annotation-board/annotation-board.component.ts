@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { CookieService } from 'ngx-cookie-service';
 import { MessageReturn } from 'src/app/models/message-return';
-import { AnnotationBoardService } from 'src/app/services/annotation-board.service';
+import { Project } from 'src/app/models/project';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-annotation-board',
@@ -12,18 +13,17 @@ import { AnnotationBoardService } from 'src/app/services/annotation-board.servic
 export class AnnotationBoardComponent implements OnInit {
 
   idProject:number;
-  project: any;
+  project: Project;
 
-  constructor(private annotationBoardService: AnnotationBoardService, private cookieService: CookieService) { }
+  constructor(private projectService: ProjectService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.getProjec();
   }
 
   getProjec(): void {
-    debugger;
-    
-    this.annotationBoardService.GetProject(this.cookieService.get('PROJECT_SELECT')).subscribe((returnOptions: MessageReturn) => {
+
+    this.projectService.getProject(this.cookieService.get('PROJECT_SELECT')).subscribe((returnOptions: MessageReturn) => {
       this.project = returnOptions.objectsReturn;
     });
 

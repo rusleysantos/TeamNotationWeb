@@ -1,41 +1,55 @@
 <div class="card">
     <div class="card-body ">
-            <div class="row justify-content-center">
-                <div class="col-md-3 text-center">
-                    <div><strong>Código:</strong></div>
-                    <div>{{project.idProject}}</div>
-                </div>
-                <div class="col-md-3 text-center">
-                    <div><strong>Titulo:</strong></div>
-                    <div>{{project.title}}</div>
-                </div>
-
-                <div class="col-md-3 text-center">
-                    <div><strong>Descrição:</strong></div>
-                    <div>{{project.description}}</div>
-                </div>
-
+        <div class="row justify-content-center">
+            <div class="col-md-3 text-center">
+                <div><strong>Código:</strong></div>
+                <div>{{project.idProject}}</div>
             </div>
-            <br>
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                            [style.width.%]="project.percentDone" aria-valuenow="0" aria-valuemin="0"
-                            aria-valuemax="100">Progresso: {{project.percentDone}}%</div>
-                    </div>
+            <div class="col-md-3 text-center">
+                <div><strong>Titulo:</strong></div>
+                <div>{{project.title}}</div>
+            </div>
+
+            <div class="col-md-3 text-center">
+                <div><strong>Descrição:</strong></div>
+                <div>{{project.description}}</div>
+            </div>
+
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        [style.width.%]="project.percentDone" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        Progresso: {{project.percentDone}}%</div>
                 </div>
             </div>
-       
+        </div>
+
     </div>
 </div>
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10">
-            
+        <div class="col-md-9">
+
+            <!-- <div id="teste" class="example-box" cdkDrag style="transform: translate3d(802px, 23px, 0px);">
+                Drag me around Drag me around Dragd Drag me around Drag me around
+            </div> -->
+
+            <div class="example-boundary">
+                <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag style="transform: translate3d(802px, 23px, 0px);">
+                  I can only be dragged within the dotted container
+                </div>
+
+                <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
+                    I can only be dragged within the dotted container
+                  </div>
+              </div>
+
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <app-task-board></app-task-board>
         </div>
     </div>
