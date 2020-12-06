@@ -31,26 +31,89 @@
 </div>
 <br>
 <div class="container-fluid">
+
+    <div class="row" style="margin-bottom: 14px">
+        <div class="col-md-9">
+            <button data-toggle="modal" data-target="#addAnotationModal" class="btn btn-secondary"> <svg width="1em"
+                    height="1em" viewBox="0 0 16 16" class="bi bi-plus-square" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                    <path fill-rule="evenodd"
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg> Add Notação</button>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-9">
 
-            <!-- <div id="teste" class="example-box" cdkDrag style="transform: translate3d(802px, 23px, 0px);">
-                Drag me around Drag me around Dragd Drag me around Drag me around
-            </div> -->
+            <div #messageEl 
+                 *ngFor="let item of listNotations; let i = index" 
+                 class="example-box"
+                 [ngStyle]="{'transform': item.positionCard }"
+                 cdkDrag>
+              
 
-            <div class="example-boundary">
-                <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag style="transform: translate3d(802px, 23px, 0px);">
-                  I can only be dragged within the dotted container
+                <p>{{item.description}}</p>
+
+                <div  (click)="changeNotationPosition(item.idNotation, messageEl)" [attr.id-card]="item.idNotation" class="example-handle" cdkDragHandle>
+                    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+                        </path>
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                    </svg>
                 </div>
+            </div>
 
-                <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
-                    I can only be dragged within the dotted container
-                  </div>
-              </div>
+
 
         </div>
         <div class="col-md-3">
             <app-task-board></app-task-board>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addAnotationModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-top: 9px;padding-bottom: 0px;">
+                <h1 class="modal-title h4" id="exampleModalLgLabel">Notação</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="notationForm">
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="title">Titulo:</label>
+                            <input class="form-control" placeholder="Titulo" type="text" formControlName="title"
+                                id="title" />
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="description">Descrição</label>
+                            <textarea class="form-control" formControlName="description" id="description" cols="4"
+                                rows="6"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button (click)="addNotation()" type="submit" class="btn btn-primary">Adicionar</button>
+            </div>
         </div>
     </div>
 </div>

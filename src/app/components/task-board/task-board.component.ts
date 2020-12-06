@@ -18,12 +18,12 @@ export class TaskBoardComponent implements OnInit {
   listTaks: any;
   listStatus: any;
   emptyTask: boolean;
-  typeModal:string;
+  typeModal: string;
 
   taskForm = new FormGroup({
     title: new FormControl(""),
-    weight: new FormControl(""),
-    effort: new FormControl(""),
+    weight: new FormControl("0"),
+    effort: new FormControl("0"),
     status: new FormControl(""),
     description: new FormControl("")
   });
@@ -53,7 +53,6 @@ export class TaskBoardComponent implements OnInit {
   }
 
   openModal(modal: string): void {
-debugger;
     if ('addTask') {
 
       this.getStatusAllByType(1, 100, "TA");
@@ -72,22 +71,22 @@ debugger;
 
   }
 
+
   addTaskProject(): void {
+
 
     const task = new ExecutionTask;
     task.title = this.taskForm.value.title;
     task.description = this.taskForm.value.description;
-    task.weight = this.taskForm.value.weight;
-    task.effort = this.taskForm.value.effort;
+    task.weight = this.taskForm.value.weight.toString();
+    task.effort = this.taskForm.value.effort.toString();;
     task.idStatus = parseInt(this.taskForm.value.status);
     task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
-
-    debugger;
 
     this._executionTaskService.addTaskProject(task).subscribe((returnExecutionTask: MessageReturn) => {
 
       if (returnExecutionTask.status) {
-
+        debugger;
         Swal.fire(
           returnExecutionTask.title,
           returnExecutionTask.description,
