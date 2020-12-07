@@ -27,4 +27,12 @@ export class ExecutionTaskService {
     return this.httpClient.post<MessageReturn>('/api/AddTaskProject', task, this.httpOptions);
   }
 
+  getExecutionTask(idTask: string): Observable<MessageReturn> {
+    return this.httpClient.get<MessageReturn>(`/api/GetExecutionTask?idTask=${idTask}`, this.httpOptions);
+  }
+
+  putExecutionTask(task: ExecutionTask): Observable<MessageReturn> {
+    return this.httpClient.put<MessageReturn>(`/api/PutExecutionTask`, task, this.httpOptions);
+  }
+
 }

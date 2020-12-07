@@ -15,7 +15,7 @@ export class ProjectOptionsComponent implements OnInit {
 
   listOptions: any;
 
-  constructor(private projectService: ProjectService, private router: Router, private cookieService: CookieService) { }
+  constructor(private _projectService: ProjectService, private _router: Router, private _cookieService: CookieService) { }
 
   ngOnInit(): void {
 
@@ -23,7 +23,7 @@ export class ProjectOptionsComponent implements OnInit {
   }
 
   getProjectOptions(): void {
-    this.projectService.getProjectOptions().subscribe((returnOptions: MessageReturn) => {
+    this._projectService.getProjectOptions().subscribe((returnOptions: MessageReturn) => {
       this.listOptions = returnOptions.objectsReturn;
     });
 
@@ -31,10 +31,10 @@ export class ProjectOptionsComponent implements OnInit {
 
   redirectAnnotationBoard(idProject: string): void {
 
-    this.cookieService.delete('PROJECT_SELECT');
-    this.cookieService.set('PROJECT_SELECT', idProject);
+    this._cookieService.delete('PROJECT_SELECT');
+    this._cookieService.set('PROJECT_SELECT', idProject);
 
-    this.router.navigate(['/home', {
+    this._router.navigate(['/home', {
       outlets: {
         'content': ['annotationboard']
       }

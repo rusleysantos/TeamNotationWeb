@@ -5,14 +5,14 @@
   </svg>&ensp; Quadro de Tarefas</h1>
 
 <div class="row justify-content-center">
-  <button (click)="openModal('addTask')" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-secondary"> <svg
+  <button (click)="openModal('addTask','')" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-secondary"> <svg
       width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-square" fill="currentColor"
       xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd"
         d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
       <path fill-rule="evenodd"
         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-    </svg> Add Tarefa</button>
+    </svg> Tarefa</button>
 </div>
 <br>
 <table class="table table-hover">
@@ -26,7 +26,7 @@
 
   <tbody *ngIf="!emptyTask">
 
-    <tr *ngFor="let item of listTaks; let i = index">
+    <tr *ngFor="let item of listTaks; let i = index" (click)="openModal('updateTask', item.idTask)" data-toggle="modal" data-target="#staticBackdrop">
 
       <td>
         {{ item.idTask }}
@@ -74,7 +74,6 @@
       <div class="modal-body">
         <form [formGroup]="taskForm">
 
-
           <div class="row form-group">
             <div class="col-md-12">
               <label for="title">Titulo:</label>
@@ -104,13 +103,13 @@
             </div>
           </div>
 
-          <div class="row form-group">
+          <!-- <div class="row form-group">
             <div class="col-md-12">
               <label for="attachments">Anexo:</label>
               <input class="form-control" placeholder="Esforço" type="file" formControlName="attachments"
                 id="attachments" />
             </div>
-          </div>
+          </div> -->
 
           <div class="row form-group">
             <div class="col-md-12">
@@ -125,7 +124,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button (click)="addTaskProject()" type="submit" class="btn btn-primary">Adicionar</button>
+        <button *ngIf="!changeTask" (click)="addTaskProject()" type="submit" class="btn btn-primary">Adicionar</button>
+        <button *ngIf="changeTask" (click)="putExecutionTask()" type="submit" class="btn btn-primary">Alterar</button>
       </div>
     </div>
   </div>

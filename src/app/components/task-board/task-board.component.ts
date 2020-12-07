@@ -7,6 +7,7 @@ import { ExecutionTask } from 'src/app/models/execution-task';
 import { MessageReturn } from 'src/app/models/message-return';
 import { ExecutionTaskService } from 'src/app/services/execution-task.service';
 import { StatusService } from 'src/app/services/status.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-task-board',
@@ -18,7 +19,7 @@ export class TaskBoardComponent implements OnInit {
   listTaks: any;
   listStatus: any;
   emptyTask: boolean;
-  typeModal: string;
+  changeTask: boolean;
 
   taskForm = new FormGroup({
     title: new FormControl(""),
@@ -28,12 +29,52 @@ export class TaskBoardComponent implements OnInit {
     description: new FormControl("")
   });
 
-  constructor(private _executionTaskService: ExecutionTaskService, private _cookieService: CookieService, private _statusService: StatusService) { }
+  constructor(private _executionTaskService: ExecutionTaskService,
+    private _cookieService: CookieService,
+    private _statusService: StatusService) { }
 
   ngOnInit(): void {
     this.emptyTask = true;
     this.getTasksProject(parseInt(this._cookieService.get('PROJECT_SELECT')), 1, 100);
   }
+
+  putExecutionTask(): void {
+    debugger;
+    const task = new ExecutionTask;
+    task.idTask = parseInt(this._cookieService.get('TASK_SELECT'));
+    task.title = this.taskForm.value.title;
+    task.description = this.taskForm.value.description;
+    task.weight = this.taskForm.value.weight.toString();
+    task.effort = this.taskForm.value.effort.toString();;
+    task.idStatus = parseInt(this.taskForm.value.status);
+    task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
+
+    this._executionTaskService.putExecutionTask(task).subscribe((returnPutExecutionTask: MessageReturn) => {
+
+      debugger;
+
+      if (returnPutExecutionTask.status) {
+        Swal.fire(
+          returnPutExecutionTask.title,
+          returnPutExecutionTask.description,
+          'success'
+        )
+        this.ngOnInit();
+      }
+      else {
+
+        Swal.fire(
+          returnPutExecutionTask.title,
+          returnPutExecutionTask.description,
+          'error'
+        )
+      }
+    });
+
+    this._cookieService.delete('TASK_SELECT','/')
+
+  }
+
 
   getTasksProject(idProject: number, page: number, size: number): void {
 
@@ -52,14 +93,52 @@ export class TaskBoardComponent implements OnInit {
 
   }
 
-  openModal(modal: string): void {
-    if ('addTask') {
+  openModal(modal: string, idTask: string): void {
 
+    if (modal === 'addTask') {
+
+      this.changeTask = false;
       this.getStatusAllByType(1, 100, "TA");
-      this.typeModal = modal;
+
+      this.taskForm.patchValue({
+
+        title: "",
+        weight: "0",
+        effort: "0",
+        status: "",
+        description: ""
+      });
+
+    }
+
+    if (modal === 'updateTask') {
+
+      this.changeTask = true;
+      this.getStatusAllByType(1, 100, "TA");
+      this.getExecutionTask(idTask);
+      this._cookieService.set('TASK_SELECT', idTask);
     }
 
   }
+
+
+  getExecutionTask(idTask: string): void {
+
+    this._executionTaskService.getExecutionTask(idTask).subscribe((returnTask: MessageReturn) => {
+
+      this.taskForm.patchValue({
+
+        title: returnTask.objectsReturn.title,
+        weight: returnTask.objectsReturn.weight,
+        effort: returnTask.objectsReturn.effort,
+        status: returnTask.objectsReturn.status,
+        description: returnTask.objectsReturn.description
+      });
+
+    });
+
+  }
+
 
   getStatusAllByType(page: number, size: number, type: string): void {
 
@@ -74,7 +153,6 @@ export class TaskBoardComponent implements OnInit {
 
   addTaskProject(): void {
 
-
     const task = new ExecutionTask;
     task.title = this.taskForm.value.title;
     task.description = this.taskForm.value.description;
@@ -86,7 +164,7 @@ export class TaskBoardComponent implements OnInit {
     this._executionTaskService.addTaskProject(task).subscribe((returnExecutionTask: MessageReturn) => {
 
       if (returnExecutionTask.status) {
-        debugger;
+
         Swal.fire(
           returnExecutionTask.title,
           returnExecutionTask.description,

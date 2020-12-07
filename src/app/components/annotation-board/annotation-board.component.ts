@@ -48,8 +48,6 @@ export class AnnotationBoardComponent implements OnInit {
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
     notation.positionCard = "";
 
-    debugger;
-
     this._notationService.addNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
       if (returnNotation.status) {
