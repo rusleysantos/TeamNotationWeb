@@ -23,12 +23,20 @@ export class NotationService {
     return this.httpClient.get<MessageReturn>(`/api/GetNotations?page=${page}&size=${size}&idProject=${idProject}`, this.httpOptions);
   }
 
+  getNotation(idNotation: number): Observable<MessageReturn> {
+    return this.httpClient.get<MessageReturn>(`/api/GetNotation?idNotation=${idNotation}`, this.httpOptions);
+  }
+
   addNotation(notation: Notation): Observable<MessageReturn> {
     return this.httpClient.post<MessageReturn>('/api/AddNotation', notation, this.httpOptions);
   }
 
   putNotation(notation: Notation): Observable<MessageReturn> {
     return this.httpClient.put<MessageReturn>('/api/PutNotation', notation, this.httpOptions);
+  }
+
+  deleteNotation(idNotation: number): Observable<MessageReturn> {
+    return this.httpClient.delete<MessageReturn>(`/api/DeleteNotation?idNotation=${idNotation}`, this.httpOptions);
   }
 
 }

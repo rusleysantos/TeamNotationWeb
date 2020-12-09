@@ -6,4 +6,5 @@ export class Notation {
     positionCard: string
     idUser: number
     idProject: number
+    deleted:boolean
 }
