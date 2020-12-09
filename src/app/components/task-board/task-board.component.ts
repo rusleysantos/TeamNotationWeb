@@ -153,12 +153,13 @@ export class TaskBoardComponent implements OnInit {
 
   addTaskProject(): void {
 
+    debugger;
     const task = new ExecutionTask;
     task.title = this.taskForm.value.title;
     task.description = this.taskForm.value.description;
     task.weight = this.taskForm.value.weight.toString();
     task.effort = this.taskForm.value.effort.toString();;
-    task.idStatus = parseInt(this.taskForm.value.status);
+    task.idStatus = parseInt(this.taskForm.value.status === "" ? 1 : this.taskForm.value.status);
     task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
 
     this._executionTaskService.addTaskProject(task).subscribe((returnExecutionTask: MessageReturn) => {

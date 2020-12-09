@@ -124,8 +124,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button *ngIf="!changeTask" (click)="addTaskProject()" type="submit" class="btn btn-primary">Adicionar</button>
-        <button *ngIf="changeTask" (click)="putExecutionTask()" type="submit" class="btn btn-primary">Alterar</button>
+        <button *ngIf="!changeTask" data-dismiss="modal" (click)="addTaskProject()" type="submit" class="btn btn-primary">Adicionar</button>
+        <button *ngIf="changeTask" data-dismiss="modal" (click)="putExecutionTask()" type="submit" class="btn btn-primary">Alterar</button>
       </div>
     </div>
   </div>
