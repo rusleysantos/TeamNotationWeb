@@ -68,11 +68,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "TeamNotationWeb:build"
+            "browserTarget": "TeamNotationWeb:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "TeamNotationWeb:build:production"
+              "browserTarget": "TeamNotationWeb:build",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },
