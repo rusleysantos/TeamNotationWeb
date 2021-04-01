@@ -74,7 +74,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "TeamNotationWeb:build",
+              "browserTarget": "TeamNotationWeb:build:prod",
               "proxyConfig": "proxy.config.json"
             }
           }
