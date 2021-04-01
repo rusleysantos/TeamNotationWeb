@@ -12,6 +12,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "proxyConfig": "proxy.config.json",
           "options": {
             "outputPath": "dist/TeamNotationWeb",
             "index": "src/index.html",
