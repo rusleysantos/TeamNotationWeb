@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "https://apiteamnotation.azurewebsites.net",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+} 
