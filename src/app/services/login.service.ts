@@ -18,7 +18,7 @@ export class LoginService {
   }
 
   LoginUser(login: Login): Observable<MessageReturn> {
-    return this.httpClient.post<MessageReturn>('/api/login', login, this.httpOptions);
+    return this.httpClient.post<MessageReturn>('https://apiteamnotation.azurewebsites.net/api/login', login, this.httpOptions);
   }
 
 }
