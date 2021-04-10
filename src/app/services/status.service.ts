@@ -12,6 +12,8 @@ import { Project } from '../models/project';
 })
 export class StatusService {
 
+  urlApi: string = "https://apiteamnotation.azurewebsites.net";
+
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
   httpOptions = {
@@ -22,7 +24,7 @@ export class StatusService {
   }
 
   getStatusAllByType(page: number, size: number, type: string): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`/api/GetStatusAllByType?page=${page}&size=${size}&type=${type}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`${this.urlApi}/api/GetStatusAllByType?page=${page}&size=${size}&type=${type}`, this.httpOptions);
   }
 
 }

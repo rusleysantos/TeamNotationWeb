@@ -12,6 +12,8 @@ import { Project } from '../models/project';
 
 export class ProjectService {
 
+  urlApi: string = "https://apiteamnotation.azurewebsites.net";
+
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
 
@@ -23,15 +25,15 @@ export class ProjectService {
   }
 
   addProject(project: Project): Observable<MessageReturn> {
-    return this.httpClient.post<MessageReturn>('/api/AddProject', project, this.httpOptions);
+    return this.httpClient.post<MessageReturn>(`${this.urlApi}/api/AddProject`, project, this.httpOptions);
   }
 
   getProject(idProject: string): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`/api/GetProject/?idProject=${idProject}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`${this.urlApi}/api/GetProject/?idProject=${idProject}`, this.httpOptions);
   }
 
   getProjectOptions(): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>('/api/GetProjectOptions', this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`${this.urlApi}/api/GetProjectOptions`, this.httpOptions);
   }
   
 
