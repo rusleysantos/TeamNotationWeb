@@ -11,8 +11,6 @@ import { MessageReturn } from '../models/message-return'
 })
 export class LoginService {
 
-  urlApi: string = "https://apiteamnotation.azurewebsites.net";
-  
   constructor(private httpClient: HttpClient) { }
   
   httpOptions = {
@@ -20,7 +18,7 @@ export class LoginService {
   }
 
   LoginUser(login: Login): Observable<MessageReturn> {
-    return this.httpClient.post<MessageReturn>(`${this.urlApi}/api/login`, login, this.httpOptions);
+    return this.httpClient.post<MessageReturn>(`/api/login`, login, this.httpOptions);
   }
 
 }

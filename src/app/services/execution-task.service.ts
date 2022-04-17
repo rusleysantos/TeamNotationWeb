@@ -10,8 +10,6 @@ import { MessageReturn } from '../models/message-return';
 })
 export class ExecutionTaskService {
 
-  urlApi: string = "https://apiteamnotation.azurewebsites.net";
-
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
   httpOptions = {
@@ -22,19 +20,19 @@ export class ExecutionTaskService {
   }
 
   getTasksProject(idProject: number, page: number, size: number): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`${this.urlApi}/api/GetTasksProject?idProject=${idProject}&page=${page}&size=${size}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`/api/GetTasksProject?idProject=${idProject}&page=${page}&size=${size}`, this.httpOptions);
   }
 
   addTaskProject(task: ExecutionTask): Observable<MessageReturn> {
-    return this.httpClient.post<MessageReturn>(`${this.urlApi}/api/AddTaskProject`, task, this.httpOptions);
+    return this.httpClient.post<MessageReturn>(`/api/AddTaskProject`, task, this.httpOptions);
   }
 
   getExecutionTask(idTask: string): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`${this.urlApi}/api/GetExecutionTask?idTask=${idTask}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`/api/GetExecutionTask?idTask=${idTask}`, this.httpOptions);
   }
 
   putExecutionTask(task: ExecutionTask): Observable<MessageReturn> {
-    return this.httpClient.put<MessageReturn>(`${this.urlApi}/api/PutExecutionTask`, task, this.httpOptions);
+    return this.httpClient.put<MessageReturn>(`/api/PutExecutionTask`, task, this.httpOptions);
   }
 
 }

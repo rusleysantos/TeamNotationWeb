@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "https://apiteamnotation.azurewebsites.net",
+        "target": "http://localhost:57743/",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

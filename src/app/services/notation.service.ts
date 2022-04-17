@@ -10,8 +10,6 @@ import { Notation } from '../models/notation';
 })
 export class NotationService {
 
-  urlApi: string = "https://apiteamnotation.azurewebsites.net";
-
   constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
   httpOptions = {
@@ -22,23 +20,23 @@ export class NotationService {
   }
 
   getNotations(page: number, size: number, idProject: number): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`${this.urlApi}/api/GetNotations?page=${page}&size=${size}&idProject=${idProject}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`api/GetNotations?page=${page}&size=${size}&idProject=${idProject}`, this.httpOptions);
   }
 
   getNotation(idNotation: number): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`${this.urlApi}/api/GetNotation?idNotation=${idNotation}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`/api/GetNotation?idNotation=${idNotation}`, this.httpOptions);
   }
 
   addNotation(notation: Notation): Observable<MessageReturn> {
-    return this.httpClient.post<MessageReturn>(`${this.urlApi}/api/AddNotation`, notation, this.httpOptions);
+    return this.httpClient.post<MessageReturn>(`/api/AddNotation`, notation, this.httpOptions);
   }
 
   putNotation(notation: Notation): Observable<MessageReturn> {
-    return this.httpClient.put<MessageReturn>(`${this.urlApi}/api/PutNotation`, notation, this.httpOptions);
+    return this.httpClient.put<MessageReturn>(`/api/PutNotation`, notation, this.httpOptions);
   }
 
   deleteNotation(idNotation: number): Observable<MessageReturn> {
-    return this.httpClient.delete<MessageReturn>(`${this.urlApi}/api/DeleteNotation?idNotation=${idNotation}`, this.httpOptions);
+    return this.httpClient.delete<MessageReturn>(`/api/DeleteNotation?idNotation=${idNotation}`, this.httpOptions);
   }
 
 }

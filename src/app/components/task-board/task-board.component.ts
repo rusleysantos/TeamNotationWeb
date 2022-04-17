@@ -39,7 +39,7 @@ export class TaskBoardComponent implements OnInit {
   }
 
   putExecutionTask(): void {
-    debugger;
+
     const task = new ExecutionTask;
     task.idTask = parseInt(this._cookieService.get('TASK_SELECT'));
     task.title = this.taskForm.value.title;
@@ -50,8 +50,6 @@ export class TaskBoardComponent implements OnInit {
     task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
 
     this._executionTaskService.putExecutionTask(task).subscribe((returnPutExecutionTask: MessageReturn) => {
-
-      debugger;
 
       if (returnPutExecutionTask.status) {
         Swal.fire(
@@ -108,7 +106,6 @@ export class TaskBoardComponent implements OnInit {
         status: "",
         description: ""
       });
-
     }
 
     if (modal === 'updateTask') {
@@ -153,7 +150,6 @@ export class TaskBoardComponent implements OnInit {
 
   addTaskProject(): void {
 
-    debugger;
     const task = new ExecutionTask;
     task.title = this.taskForm.value.title;
     task.description = this.taskForm.value.description;

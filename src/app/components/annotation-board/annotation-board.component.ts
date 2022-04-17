@@ -171,7 +171,6 @@ export class AnnotationBoardComponent implements OnInit {
 
   deleteNotation(idNotation: number): void {
 
-    debugger;
     this._notationService.deleteNotation(idNotation).subscribe((returnNotation: MessageReturn) => {
 
       if (returnNotation.status) {
