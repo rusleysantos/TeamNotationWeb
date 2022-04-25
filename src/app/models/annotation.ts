@@ -1,4 +1,4 @@
-export class Notation {
+export class Annotation {
     
     idNotation: number
     title: string

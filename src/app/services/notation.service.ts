@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { MessageReturn } from '../models/message-return';
-import { Notation } from '../models/notation';
+import { Annotation } from '../models/annotation';
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +20,23 @@ export class NotationService {
   }
 
   getNotations(page: number, size: number, idProject: number): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`api/GetNotations?page=${page}&size=${size}&idProject=${idProject}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`api/GetAnnotations?page=${page}&size=${size}&idProject=${idProject}`, this.httpOptions);
   }
 
   getNotation(idNotation: number): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`/api/GetNotation?idNotation=${idNotation}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`/api/GetAnnotation?idNotation=${idNotation}`, this.httpOptions);
   }
 
-  addNotation(notation: Notation): Observable<MessageReturn> {
-    return this.httpClient.post<MessageReturn>(`/api/AddNotation`, notation, this.httpOptions);
+  addNotation(notation: Annotation): Observable<MessageReturn> {
+    return this.httpClient.post<MessageReturn>(`/api/AddAnnotation`, notation, this.httpOptions);
   }
 
-  putNotation(notation: Notation): Observable<MessageReturn> {
-    return this.httpClient.put<MessageReturn>(`/api/PutNotation`, notation, this.httpOptions);
+  putNotation(notation: Annotation): Observable<MessageReturn> {
+    return this.httpClient.put<MessageReturn>(`/api/PutAnnotation`, notation, this.httpOptions);
   }
 
   deleteNotation(idNotation: number): Observable<MessageReturn> {
-    return this.httpClient.delete<MessageReturn>(`/api/DeleteNotation?idNotation=${idNotation}`, this.httpOptions);
+    return this.httpClient.delete<MessageReturn>(`/api/DeleteAnnotation?idNotation=${idNotation}`, this.httpOptions);
   }
 
 }

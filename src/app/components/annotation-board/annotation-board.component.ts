@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { CookieService } from 'ngx-cookie-service';
 import { MessageReturn } from 'src/app/models/message-return';
-import { Notation } from 'src/app/models/notation';
+import { Annotation } from 'src/app/models/annotation';
 import { Project } from 'src/app/models/project';
 import { NotationService } from 'src/app/services/notation.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -67,7 +67,7 @@ export class AnnotationBoardComponent implements OnInit {
     //   idNotation: ""
     // });
 
-    const notation = new Notation;
+    const notation = new Annotation;
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
@@ -132,7 +132,7 @@ export class AnnotationBoardComponent implements OnInit {
 
   putNotation(): void {
 
-    const notation = new Notation;
+    const notation = new Annotation;
     notation.idNotation = this.notationForm.value.idNotation;
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
@@ -198,7 +198,7 @@ export class AnnotationBoardComponent implements OnInit {
   changeNotationPosition(idNotation: number, messageEl: any): void {
 
     const element = messageEl.getAttribute('style').replaceAll('transform: ', '').replaceAll(';', '');
-    const notation = new Notation;
+    const notation = new Annotation;
     notation.idNotation = idNotation;
     notation.positionCard = element;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
