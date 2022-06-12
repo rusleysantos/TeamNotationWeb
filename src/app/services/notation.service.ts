@@ -24,7 +24,7 @@ export class NotationService {
   }
 
   getNotation(idNotation: number): Observable<MessageReturn> {
-    return this.httpClient.get<MessageReturn>(`/api/GetAnnotation?idNotation=${idNotation}`, this.httpOptions);
+    return this.httpClient.get<MessageReturn>(`/api/GetAnnotation?idAnnotation=${idNotation}`, this.httpOptions);
   }
 
   addNotation(notation: Annotation): Observable<MessageReturn> {
@@ -36,7 +36,7 @@ export class NotationService {
   }
 
   deleteNotation(idNotation: number): Observable<MessageReturn> {
-    return this.httpClient.delete<MessageReturn>(`/api/DeleteAnnotation?idNotation=${idNotation}`, this.httpOptions);
+    return this.httpClient.delete<MessageReturn>(`/api/DeleteAnnotation?idAnnotation=${idNotation}`, this.httpOptions);
   }
 
 }

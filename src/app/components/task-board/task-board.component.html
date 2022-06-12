@@ -21,6 +21,7 @@
       <th scope="col">#</th>
       <th scope="col">Titulo</th>
       <th scope="col">Descrição</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
 
@@ -38,6 +39,10 @@
 
       <td>
         {{ item.description }}
+      </td>
+
+      <td>
+        {{ item.status.description }}
       </td>
 
     </tr>

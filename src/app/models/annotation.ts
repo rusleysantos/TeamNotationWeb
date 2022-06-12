@@ -1,6 +1,6 @@
 export class Annotation {
     
-    idNotation: number
+    idAnnotation: number
     title: string
     description: string
     positionCard: string

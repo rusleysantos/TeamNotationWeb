@@ -39,8 +39,8 @@ export class AnnotationBoardComponent implements OnInit {
 
   getProjec(): void {
 
-    this._projectService.getProject(this._cookieService.get('PROJECT_SELECT')).subscribe((returnOptions: MessageReturn) => {
-      this.project = returnOptions.objectsReturn;
+    this._projectService.getProject(this._cookieService.get('PROJECT_SELECT')).subscribe((messageReturn: MessageReturn) => {
+      this.project = messageReturn.objectsReturn;
     });
 
   }
@@ -133,7 +133,7 @@ export class AnnotationBoardComponent implements OnInit {
   putNotation(): void {
 
     const notation = new Annotation;
-    notation.idNotation = this.notationForm.value.idNotation;
+    notation.idAnnotation = this.notationForm.value.idNotation;
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
 
@@ -195,11 +195,11 @@ export class AnnotationBoardComponent implements OnInit {
 
   }
 
-  changeNotationPosition(idNotation: number, messageEl: any): void {
+  changeNotationPosition(idAnnotation: number, messageEl: any): void {
 
     const element = messageEl.getAttribute('style').replaceAll('transform: ', '').replaceAll(';', '');
     const notation = new Annotation;
-    notation.idNotation = idNotation;
+    notation.idAnnotation = idAnnotation;
     notation.positionCard = element;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
     //notation.positionCard = element.style.fontSize;
