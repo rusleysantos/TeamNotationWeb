@@ -35,7 +35,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     DragDropModule
-    
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

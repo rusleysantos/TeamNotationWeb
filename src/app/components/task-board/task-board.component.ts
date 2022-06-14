@@ -8,6 +8,8 @@ import { MessageReturn } from 'src/app/models/message-return';
 import { ExecutionTaskService } from 'src/app/services/execution-task.service';
 import { StatusService } from 'src/app/services/status.service';
 import { ProjectService } from 'src/app/services/project.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { debuglog } from 'util';
 
 @Component({
   selector: 'app-task-board',
@@ -28,6 +30,10 @@ export class TaskBoardComponent implements OnInit {
     status: new FormControl(""),
     description: new FormControl("")
   });
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.listTaks, event.previousIndex, event.currentIndex);
+  }
 
   constructor(private _executionTaskService: ExecutionTaskService,
     private _cookieService: CookieService,
