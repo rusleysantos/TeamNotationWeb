@@ -35,4 +35,9 @@ export class ExecutionTaskService {
     return this.httpClient.put<MessageReturn>(`/api/PutExecutionTask`, task, this.httpOptions);
   }
 
+  putPositionTask(listTask: Array<ExecutionTask>): Observable<MessageReturn> {
+    return this.httpClient.put<MessageReturn>(`/api/PutPositionTask`,listTask ,this.httpOptions);
+  }
+
+
 }

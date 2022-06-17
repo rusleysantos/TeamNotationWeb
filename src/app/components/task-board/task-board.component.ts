@@ -8,7 +8,7 @@ import { MessageReturn } from 'src/app/models/message-return';
 import { ExecutionTaskService } from 'src/app/services/execution-task.service';
 import { StatusService } from 'src/app/services/status.service';
 import { ProjectService } from 'src/app/services/project.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { debuglog } from 'util';
 
 @Component({
@@ -18,7 +18,7 @@ import { debuglog } from 'util';
 })
 export class TaskBoardComponent implements OnInit {
 
-  listTaks: any;
+  listTask: any;
   listStatus: any;
   emptyTask: boolean;
   changeTask: boolean;
@@ -32,7 +32,12 @@ export class TaskBoardComponent implements OnInit {
   });
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.listTaks, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.listTask, event.previousIndex, event.currentIndex);
+    debugger;
+
+    this.putPositionTask(this.listTask);
+
+    //this.ngOnInit()
   }
 
   constructor(private _executionTaskService: ExecutionTaskService,
@@ -43,6 +48,15 @@ export class TaskBoardComponent implements OnInit {
     this.emptyTask = true;
     this.getTasksProject(parseInt(this._cookieService.get('PROJECT_SELECT')), 1, 100);
   }
+
+  putPositionTask(listTask: Array<ExecutionTask>): void {
+    debugger;
+    this._executionTaskService.putPositionTask(listTask).subscribe((returnPutExecutionTask: MessageReturn) => {
+
+      //this.listTask = returnPutExecutionTask.objectsReturn;
+    });
+  }
+
 
   putExecutionTask(): void {
 
@@ -75,17 +89,16 @@ export class TaskBoardComponent implements OnInit {
       }
     });
 
-    this._cookieService.delete('TASK_SELECT','/')
+    this._cookieService.delete('TASK_SELECT', '/')
 
   }
-
 
   getTasksProject(idProject: number, page: number, size: number): void {
 
     this._executionTaskService.getTasksProject(idProject, page, size).subscribe((returnOptions: MessageReturn) => {
-      this.listTaks = returnOptions.objectsReturn;
+      this.listTask = returnOptions.objectsReturn;
 
-      if (this.listTaks.length === 0) {
+      if (this.listTask.length === 0) {
         this.emptyTask = true;
       }
       else {
@@ -124,7 +137,6 @@ export class TaskBoardComponent implements OnInit {
 
   }
 
-
   getExecutionTask(idTask: string): void {
 
     this._executionTaskService.getExecutionTask(idTask).subscribe((returnTask: MessageReturn) => {
@@ -142,7 +154,6 @@ export class TaskBoardComponent implements OnInit {
 
   }
 
-
   getStatusAllByType(page: number, size: number, type: string): void {
 
     this._statusService.getStatusAllByType(page, size, type).subscribe((returnOptions: MessageReturn) => {
@@ -152,7 +163,6 @@ export class TaskBoardComponent implements OnInit {
     });
 
   }
-
 
   addTaskProject(): void {
 
