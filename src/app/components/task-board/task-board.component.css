@@ -1,5 +1,5 @@
-td {
-  cursor: pointer;
+.cursor-click {
+  cursor: pointer !important
 }
 
 .example-list {

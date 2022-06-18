@@ -9,12 +9,12 @@
   </div>
 
   <div class="col-md-6">
-    <h1 style="font-size: 37px; margin-left: -46px;">&ensp; Quadro de Tarefas</h1>
+    <h1 style="font-size: 31px; margin-left: -29px;">&ensp; Quadro de Tarefas</h1>
   </div>
 
   <div class="col-md-3">
     <div class="row justify-content-center">
-      <button style="margin-top: 11px;" (click)="openModal('addTask','')" data-toggle="modal" data-target="#staticBackdrop"
+      <button style="margin-top: 11px; margin-left: -40px;" (click)="openModal('addTask','')" data-toggle="modal" data-target="#staticBackdrop"
         class="btn btn-secondary"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-square"
           fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd"
@@ -31,20 +31,14 @@
   <div class="example-box" *ngFor="let item of listTask; let i = index" cdkDrag>
 
     <div class="row">
-
-      <div class="col-md-12 row-margin-card">
+      <div class="col-md-12 row-margin-card cursor-click" (click)="openModal('updateTask', item.idTask)" data-toggle="modal" data-target="#staticBackdrop">
         <div class="row">
-          <h2 class="row-margin-card2">{{ item.idTask }} - {{ item.title }}</h2> <h4 class="status-task">{{item.status.description}}</h4>
+          <h2 class="row-margin-card2"> {{ item.idTask }} - {{ item.title }}</h2> <h4 class="status-task">{{item.status.description}}</h4>
         </div>
         <div class="row">
           <div class="text-task-body">{{ item.description }}</div>
         </div>
       </div>
-
-      <!-- <div class="col-md-2">
-        {{ item.status.description }}
-      </div> -->
-
     </div>
 
   </div>
