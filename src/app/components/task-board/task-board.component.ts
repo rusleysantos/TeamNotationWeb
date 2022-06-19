@@ -146,7 +146,7 @@ export class TaskBoardComponent implements OnInit {
         title: returnTask.objectsReturn.title,
         weight: returnTask.objectsReturn.weight,
         effort: returnTask.objectsReturn.effort,
-        status: returnTask.objectsReturn.status,
+        status: returnTask.objectsReturn.idStatus,
         description: returnTask.objectsReturn.description
       });
 

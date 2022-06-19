@@ -9,6 +9,5 @@ export class ExecutionTask {
     idProject: number;
     idStatus: number;
     idUser: number;
-    SequenceNumber: number;
 
 }
