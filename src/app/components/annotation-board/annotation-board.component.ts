@@ -24,9 +24,12 @@ export class AnnotationBoardComponent implements OnInit {
 
   notationForm = new FormGroup({
 
+    idAnnotation: new FormControl(""),
     title: new FormControl(""),
     description: new FormControl(""),
-    idNotation: new FormControl("")
+    colorBackground: new FormControl(""),
+    colorText: new FormControl("")
+
   });
 
   constructor(private _projectService: ProjectService, private _cookieService: CookieService, private _notationService: NotationService) { }
@@ -52,7 +55,9 @@ export class AnnotationBoardComponent implements OnInit {
     this.notationForm.patchValue({
       title: "",
       description: "",
-      idNotation: ""
+      idAnnotation: "",
+      colorBackground: "",
+      colorText: ""
     });
 
   }
@@ -61,17 +66,13 @@ export class AnnotationBoardComponent implements OnInit {
 
     this.notationChange = false;
 
-    // this.notationForm.patchValue({
-    //   title: "",
-    //   description: "",
-    //   idNotation: ""
-    // });
-
     const notation = new Annotation;
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
     notation.positionCard = "";
+    notation.colorBackground = this.notationForm.value.colorBackground;
+    notation.colorText = this.notationForm.value.colorText;
 
     this._notationService.addNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
@@ -87,8 +88,9 @@ export class AnnotationBoardComponent implements OnInit {
         this.notationForm.patchValue({
           title: "",
           description: "",
-          idNotation: ""
-
+          idAnnotation: "",
+          colorBackground: "",
+          colorText: ""
         });
 
 
@@ -116,12 +118,13 @@ export class AnnotationBoardComponent implements OnInit {
   getNotation(idNotation: number): void {
 
     this._notationService.getNotation(idNotation).subscribe((returnNotation: MessageReturn) => {
-
       this.notationForm.patchValue({
 
-        idNotation: returnNotation.objectsReturn.idNotation,
+        idAnnotation: returnNotation.objectsReturn.idAnnotation,
         title: returnNotation.objectsReturn.title,
-        description: returnNotation.objectsReturn.description
+        description: returnNotation.objectsReturn.description,
+        colorBackground: returnNotation.objectsReturn.colorBackground,
+        colorText: returnNotation.objectsReturn.colorText
       });
 
     });
@@ -133,9 +136,11 @@ export class AnnotationBoardComponent implements OnInit {
   putNotation(): void {
 
     const notation = new Annotation;
-    notation.idAnnotation = this.notationForm.value.idNotation;
+    notation.idAnnotation = this.notationForm.value.idAnnotation;
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
+    notation.colorBackground = this.notationForm.value.colorBackground;
+    notation.colorText = this.notationForm.value.colorText;
 
     this._notationService.putNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
@@ -152,7 +157,7 @@ export class AnnotationBoardComponent implements OnInit {
 
           title: "",
           description: "",
-          idNotation: ""
+          idAnnotation: ""
         });
       }
       else {
@@ -197,10 +202,17 @@ export class AnnotationBoardComponent implements OnInit {
 
   changeNotationPosition(idAnnotation: number, messageEl: any): void {
 
-    const element = messageEl.getAttribute('style').replaceAll('transform: ', '').replaceAll(';', '');
+    const element = messageEl
+      .getAttribute('style')
+      .replaceAll('transform: ', '')
+      .replaceAll(';', '');
+
+    //TODO: ele está pegando todos os estilos e separando apenas o referente a posicionamento, encontrar melhor forma
+    const elementTransform = element.substring(element.indexOf("translate3d"), element.lastIndexOf(")")+1);
+
     const notation = new Annotation;
     notation.idAnnotation = idAnnotation;
-    notation.positionCard = element;
+    notation.positionCard = elementTransform;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
     //notation.positionCard = element.style.fontSize;
 

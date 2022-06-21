@@ -34,9 +34,9 @@
 
     <div class="row" style="margin-bottom: 14px">
         <div class="col-md-9">
-            <button (click)="openModal()" data-toggle="modal" data-target="#addAnotationModal" class="btn btn-secondary"> <svg width="1em"
-                    height="1em" viewBox="0 0 16 16" class="bi bi-plus-square" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
+            <button (click)="openModal()" data-toggle="modal" data-target="#addAnotationModal"
+                class="btn btn-secondary"> <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-square"
+                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                     <path fill-rule="evenodd"
@@ -49,10 +49,10 @@
         <div class="col-md-9">
 
             <div #messageEl *ngFor="let item of listNotations; let i = index" class="example-box"
-                [ngStyle]="{'transform': item.positionCard }" cdkDrag>
+                [ngStyle]="{'transform': item.positionCard, 'background': item.colorBackground  }" cdkDrag>
 
 
-                <p>{{item.description}}</p>
+                <p [ngStyle]="{'color': item.colorText  }">{{item.description}}</p>
 
                 <div (click)="changeNotationPosition(item.idAnnotation, messageEl)" [attr.id-card]="item.idAnnotation"
                     class="example-handle" cdkDragHandle>
@@ -65,7 +65,8 @@
                         <path d="M0 0h24v24H0z" fill="none"></path>
                     </svg>
 
-                    <svg (click)="getNotation(item.idAnnotation)" data-toggle="modal" data-target="#addAnotationModal" style="margin-left: -52px; cursor: pointer !important;" width="1.5em" height="1.5em"
+                    <svg (click)="getNotation(item.idAnnotation)" data-toggle="modal" data-target="#addAnotationModal"
+                        style="margin-left: -52px; cursor: pointer !important;" width="1.5em" height="1.5em"
                         viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -96,7 +97,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="padding-top: 9px;padding-bottom: 0px;">
-                <h1 class="modal-title h4" id="exampleModalLgLabel">Notação</h1>
+                <h1 class="modal-title h4" id="exampleModalLgLabel">Anotação</h1>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -120,9 +121,26 @@
                         </div>
                     </div>
 
+                    <div id="container">
+                        <div id="label">Cores</div>
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label for="title">Card:</label>
+                                <input class="form-control" placeholder="" type="color"
+                                    formControlName="colorBackground" id="colorBackground" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="title">Texto:</label>
+                                <input class="form-control" placeholder="" type="color"
+                                    formControlName="colorText" id="colorText" />
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <label for="description">Descrição</label>
+                            <label for="description">Descrição:</label>
                             <textarea class="form-control" formControlName="description" id="description" cols="4"
                                 rows="6"></textarea>
                         </div>
@@ -133,8 +151,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button *ngIf="!notationChange" data-dismiss="modal" (click)="addNotation()" type="submit" class="btn btn-primary">Adicionar</button>
-                <button *ngIf="notationChange" data-dismiss="modal" (click)="putNotation()" type="submit" class="btn btn-primary">Alterar</button>
+                <button *ngIf="!notationChange" data-dismiss="modal" (click)="addNotation()" type="submit"
+                    class="btn btn-primary">Adicionar</button>
+                <button *ngIf="notationChange" data-dismiss="modal" (click)="putNotation()" type="submit"
+                    class="btn btn-primary">Alterar</button>
             </div>
         </div>
     </div>
