@@ -28,15 +28,15 @@
 
 <br>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let item of listTask; let i = index" cdkDrag>
+  <div class="example-box" *ngFor="let item of listTask; let i = index" [ngStyle]="{'background': item.colorBackground  }" cdkDrag>
 
     <div class="row">
       <div class="col-md-12 row-margin-card cursor-click" (click)="openModal('updateTask', item.idTask)" data-toggle="modal" data-target="#staticBackdrop">
         <div class="row">
-          <h2 class="row-margin-card2"> {{ item.idTask }} - {{ item.title }}</h2> <h4 class="status-task">{{item.status.description}}</h4>
+          <h2 class="row-margin-card2" [ngStyle]="{'color': item.colorText  }"> {{ item.idTask }} - {{ item.title }}</h2> <h4 class="status-task" [ngStyle]="{'color': item.colorText  }">{{item.status.description}}</h4>
         </div>
         <div class="row">
-          <div class="text-task-body">{{ item.description }}</div>
+          <div class="text-task-body" [ngStyle]="{'color': item.colorText  }">{{ item.description }}</div>
         </div>
       </div>
     </div>
@@ -77,6 +77,24 @@
               <input class="form-control" placeholder="Esforço" type="number" formControlName="effort" id="effort" />
             </div>
           </div>
+
+          <div id="container">
+            <div id="label">Cores</div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label for="title">Card:</label>
+                    <input class="form-control" placeholder="" type="color"
+                        formControlName="colorBackground" id="colorBackground" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="title">Texto:</label>
+                    <input class="form-control" placeholder="" type="color"
+                        formControlName="colorText" id="colorText" />
+                </div>
+            </div>
+        </div>
+
 
           <div class="row form-group">
             <div class="col-md-12">

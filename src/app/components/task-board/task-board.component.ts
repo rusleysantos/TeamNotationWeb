@@ -28,7 +28,9 @@ export class TaskBoardComponent implements OnInit {
     weight: new FormControl("0"),
     effort: new FormControl("0"),
     status: new FormControl(""),
-    description: new FormControl("")
+    description: new FormControl(""),
+    colorBackground: new FormControl(""),
+    colorText: new FormControl("")
   });
 
   drop(event: CdkDragDrop<string[]>) {
@@ -68,6 +70,8 @@ export class TaskBoardComponent implements OnInit {
     task.effort = this.taskForm.value.effort.toString();;
     task.idStatus = parseInt(this.taskForm.value.status);
     task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
+    task.colorBackground = this.taskForm.value.colorBackground;
+    task.colorText = this.taskForm.value.colorText;
 
     this._executionTaskService.putExecutionTask(task).subscribe((returnPutExecutionTask: MessageReturn) => {
 
@@ -173,6 +177,8 @@ export class TaskBoardComponent implements OnInit {
     task.effort = this.taskForm.value.effort.toString();;
     task.idStatus = parseInt(this.taskForm.value.status === "" ? 1 : this.taskForm.value.status);
     task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
+    task.colorBackground = this.taskForm.value.colorBackground;
+    task.colorText = this.taskForm.value.colorText;
 
     this._executionTaskService.addTaskProject(task).subscribe((returnExecutionTask: MessageReturn) => {
 

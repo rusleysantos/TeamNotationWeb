@@ -70,7 +70,7 @@ export class AnnotationBoardComponent implements OnInit {
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
-    notation.positionCard = "";
+    notation.positionCard = "translate3d(6px, -803px, 0px)";
     notation.colorBackground = this.notationForm.value.colorBackground;
     notation.colorText = this.notationForm.value.colorText;
 

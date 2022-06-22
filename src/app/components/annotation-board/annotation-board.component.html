@@ -51,11 +51,11 @@
             <div #messageEl *ngFor="let item of listNotations; let i = index" class="example-box"
                 [ngStyle]="{'transform': item.positionCard, 'background': item.colorBackground  }" cdkDrag>
 
-
                 <p [ngStyle]="{'color': item.colorText  }">{{item.description}}</p>
 
                 <div (click)="changeNotationPosition(item.idAnnotation, messageEl)" [attr.id-card]="item.idAnnotation"
                     class="example-handle" cdkDragHandle>
+
                     <svg style="margin-left: -53px" width="1.5em" height="1.5em" fill="currentColor"
                         viewBox="0 0 24 24">
                         <path
@@ -113,13 +113,13 @@
                         </div>
                     </div>
 
-                    <div class="row form-group">
+                    <!-- <div class="row form-group">
                         <div class="col-md-12">
                             <label for="title">Titulo:</label>
                             <input class="form-control" placeholder="Titulo" type="text" formControlName="title"
                                 id="title" />
                         </div>
-                    </div>
+                    </div> -->
 
                     <div id="container">
                         <div id="label">Cores</div>
