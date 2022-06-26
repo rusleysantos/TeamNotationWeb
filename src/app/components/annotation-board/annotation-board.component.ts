@@ -8,6 +8,7 @@ import { Project } from 'src/app/models/project';
 import { NotationService } from 'src/app/services/notation.service';
 import { ProjectService } from 'src/app/services/project.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { ExecutionTaskService } from 'src/app/services/execution-task.service';
 
 @Component({
   selector: 'app-annotation-board',
@@ -20,7 +21,8 @@ export class AnnotationBoardComponent implements OnInit {
   project: Project;
   listNotations: any;
   notationChange: boolean;
-
+  listTask: any;
+  emptyTask: boolean;
 
   notationForm = new FormGroup({
 
@@ -28,26 +30,21 @@ export class AnnotationBoardComponent implements OnInit {
     title: new FormControl(""),
     description: new FormControl(""),
     colorBackground: new FormControl(""),
-    colorText: new FormControl("")
-
+    colorText: new FormControl(""),
+    idTask: new FormControl("")
   });
 
-  constructor(private _projectService: ProjectService, private _cookieService: CookieService, private _notationService: NotationService) { }
+  constructor(private _projectService: ProjectService,
+    private _cookieService: CookieService,
+    private _notationService: NotationService,
+    private _executionTaskService: ExecutionTaskService) { }
 
   ngOnInit(): void {
     this.getProjec();
     this.getNotations();
     this.notationChange = false;
   }
-
-  getProjec(): void {
-
-    this._projectService.getProject(this._cookieService.get('PROJECT_SELECT')).subscribe((messageReturn: MessageReturn) => {
-      this.project = messageReturn.objectsReturn;
-    });
-
-  }
-
+  
   openModal(): void {
 
     this.notationChange = false;
@@ -57,7 +54,35 @@ export class AnnotationBoardComponent implements OnInit {
       description: "",
       idAnnotation: "",
       colorBackground: "",
-      colorText: ""
+      colorText: "",
+      idTask: ""
+    });
+    
+    this.getTasksProject(parseInt(this._cookieService.get('PROJECT_SELECT')), 1, 100);
+
+  }
+
+  getTasksProject(idProject: number, page: number, size: number): void {
+    debugger;
+    this._executionTaskService.getTasksProject(idProject, page, size).subscribe((returnOptions: MessageReturn) => {
+      this.listTask = returnOptions.objectsReturn;
+
+      if (this.listTask.length === 0) {
+        this.emptyTask = true;
+      }
+      else {
+
+        //this.emptyTask = false;
+      }
+
+    });
+
+  }
+
+  getProjec(): void {
+
+    this._projectService.getProject(this._cookieService.get('PROJECT_SELECT')).subscribe((messageReturn: MessageReturn) => {
+      this.project = messageReturn.objectsReturn;
     });
 
   }
@@ -73,6 +98,7 @@ export class AnnotationBoardComponent implements OnInit {
     notation.positionCard = "translate3d(6px, -803px, 0px)";
     notation.colorBackground = this.notationForm.value.colorBackground;
     notation.colorText = this.notationForm.value.colorText;
+    notation.idTask = this.notationForm.value.idTask != null ? parseInt(this.notationForm.value.idTask) : 0
 
     this._notationService.addNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
@@ -108,7 +134,7 @@ export class AnnotationBoardComponent implements OnInit {
   }
 
   getNotations(): void {
-
+debugger;
     this._notationService.getNotations(1, 100, parseInt(this._cookieService.get('PROJECT_SELECT'))).subscribe((returnOptions: MessageReturn) => {
       this.listNotations = returnOptions.objectsReturn;
     });
@@ -117,6 +143,8 @@ export class AnnotationBoardComponent implements OnInit {
 
   getNotation(idNotation: number): void {
 
+    this.getTasksProject(parseInt(this._cookieService.get('PROJECT_SELECT')), 1, 100);
+
     this._notationService.getNotation(idNotation).subscribe((returnNotation: MessageReturn) => {
       this.notationForm.patchValue({
 
@@ -124,7 +152,8 @@ export class AnnotationBoardComponent implements OnInit {
         title: returnNotation.objectsReturn.title,
         description: returnNotation.objectsReturn.description,
         colorBackground: returnNotation.objectsReturn.colorBackground,
-        colorText: returnNotation.objectsReturn.colorText
+        colorText: returnNotation.objectsReturn.colorText,
+        idTask:  returnNotation.objectsReturn.idTask
       });
 
     });
@@ -135,12 +164,16 @@ export class AnnotationBoardComponent implements OnInit {
 
   putNotation(): void {
 
+    debugger;
+
     const notation = new Annotation;
     notation.idAnnotation = this.notationForm.value.idAnnotation;
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
     notation.colorBackground = this.notationForm.value.colorBackground;
     notation.colorText = this.notationForm.value.colorText;
+    notation.idTask = this.notationForm.value.idTask != undefined ? parseInt(this.notationForm.value.idTask) : 0;
+    
 
     this._notationService.putNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
@@ -172,7 +205,6 @@ export class AnnotationBoardComponent implements OnInit {
     });
 
   }
-
 
   deleteNotation(idNotation: number): void {
 
@@ -208,7 +240,7 @@ export class AnnotationBoardComponent implements OnInit {
       .replaceAll(';', '');
 
     //TODO: ele está pegando todos os estilos e separando apenas o referente a posicionamento, encontrar melhor forma
-    const elementTransform = element.substring(element.indexOf("translate3d"), element.lastIndexOf(")")+1);
+    const elementTransform = element.substring(element.indexOf("translate3d"), element.lastIndexOf(")") + 1);
 
     const notation = new Annotation;
     notation.idAnnotation = idAnnotation;

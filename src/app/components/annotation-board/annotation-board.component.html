@@ -53,10 +53,10 @@
 
                 <p [ngStyle]="{'color': item.colorText  }">{{item.description}}</p>
 
-                <div (click)="changeNotationPosition(item.idAnnotation, messageEl)" [attr.id-card]="item.idAnnotation"
-                    class="example-handle" cdkDragHandle>
+                <div 
+                    class="example-handle">
 
-                    <svg style="margin-left: -53px" width="1.5em" height="1.5em" fill="currentColor"
+                    <svg (click)="changeNotationPosition(item.idAnnotation, messageEl)" [attr.id-card]="item.idAnnotation" cdkDragHandle style="margin-left: -53px" width="1.5em" height="1.5em" fill="currentColor"
                         viewBox="0 0 24 24">
                         <path
                             d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
@@ -80,8 +80,8 @@
                         <path fill-rule="evenodd"
                             d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
                     </svg>
-
                 </div>
+
             </div>
         </div>
         <div class="col-md-3">
@@ -132,9 +132,20 @@
 
                             <div class="col-md-6">
                                 <label for="title">Texto:</label>
-                                <input class="form-control" placeholder="" type="color"
-                                    formControlName="colorText" id="colorText" />
+                                <input class="form-control" placeholder="" type="color" formControlName="colorText"
+                                    id="colorText" />
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="status">Link TO:</label>
+                            <select formControlName="idTask" class="form-control" id="idTask">
+                                <option *ngFor="let item of listTask; let i = index" value="{{item.idTask}}">
+                                    {{item.idTask}} - {{item.title}}
+                                </option>
+                            </select>
                         </div>
                     </div>
 

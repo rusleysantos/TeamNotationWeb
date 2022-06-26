@@ -9,4 +9,5 @@ export class Annotation {
     deleted: boolean
     colorBackground: string
     colorText: string
+    idTask: number
 }

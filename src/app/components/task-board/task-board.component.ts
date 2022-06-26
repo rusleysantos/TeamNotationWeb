@@ -35,7 +35,6 @@ export class TaskBoardComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.listTask, event.previousIndex, event.currentIndex);
-    debugger;
 
     this.putPositionTask(this.listTask);
 
@@ -52,10 +51,8 @@ export class TaskBoardComponent implements OnInit {
   }
 
   putPositionTask(listTask: Array<ExecutionTask>): void {
-    debugger;
     this._executionTaskService.putPositionTask(listTask).subscribe((returnPutExecutionTask: MessageReturn) => {
 
-      //this.listTask = returnPutExecutionTask.objectsReturn;
     });
   }
 
@@ -107,7 +104,7 @@ export class TaskBoardComponent implements OnInit {
       }
       else {
 
-        this.emptyTask = false;
+        //this.emptyTask = false;
       }
 
     });
@@ -151,7 +148,9 @@ export class TaskBoardComponent implements OnInit {
         weight: returnTask.objectsReturn.weight,
         effort: returnTask.objectsReturn.effort,
         status: returnTask.objectsReturn.idStatus,
-        description: returnTask.objectsReturn.description
+        description: returnTask.objectsReturn.description,
+        colorBackground: returnTask.objectsReturn.colorBackground,
+        colorText: returnTask.objectsReturn.colorText
       });
 
     });
