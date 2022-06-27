@@ -70,8 +70,10 @@
 } 
 
 .status-task{
-  margin-top: 4px;
-  margin-left: 10px;
+  margin-top: -9px;
+  margin-left: 3px;
+  margin-bottom: -12px;
+  padding-bottom: 8px;
 }
 
 #container {

@@ -63,7 +63,7 @@ export class AnnotationBoardComponent implements OnInit {
   }
 
   getTasksProject(idProject: number, page: number, size: number): void {
-    debugger;
+
     this._executionTaskService.getTasksProject(idProject, page, size).subscribe((returnOptions: MessageReturn) => {
       this.listTask = returnOptions.objectsReturn;
 
@@ -134,7 +134,6 @@ export class AnnotationBoardComponent implements OnInit {
   }
 
   getNotations(): void {
-debugger;
     this._notationService.getNotations(1, 100, parseInt(this._cookieService.get('PROJECT_SELECT'))).subscribe((returnOptions: MessageReturn) => {
       this.listNotations = returnOptions.objectsReturn;
     });
@@ -163,8 +162,6 @@ debugger;
   }
 
   putNotation(): void {
-
-    debugger;
 
     const notation = new Annotation;
     notation.idAnnotation = this.notationForm.value.idAnnotation;

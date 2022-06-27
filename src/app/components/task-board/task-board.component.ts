@@ -10,6 +10,7 @@ import { StatusService } from 'src/app/services/status.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { debuglog } from 'util';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-task-board',
@@ -18,6 +19,7 @@ import { debuglog } from 'util';
 })
 export class TaskBoardComponent implements OnInit {
 
+  listUser: any;
   listTask: any;
   listStatus: any;
   emptyTask: boolean;
@@ -30,7 +32,9 @@ export class TaskBoardComponent implements OnInit {
     status: new FormControl(""),
     description: new FormControl(""),
     colorBackground: new FormControl(""),
-    colorText: new FormControl("")
+    colorText: new FormControl(""),
+    idUser: new FormControl(""),
+
   });
 
   drop(event: CdkDragDrop<string[]>) {
@@ -43,11 +47,21 @@ export class TaskBoardComponent implements OnInit {
 
   constructor(private _executionTaskService: ExecutionTaskService,
     private _cookieService: CookieService,
-    private _statusService: StatusService) { }
+    private _statusService: StatusService,
+    private _userService: UserService) { }
 
   ngOnInit(): void {
     this.emptyTask = true;
     this.getTasksProject(parseInt(this._cookieService.get('PROJECT_SELECT')), 1, 100);
+  }
+
+  getUserAll(page: number, size: number): void {
+
+    this._userService.getUserAll(page, size).subscribe((returnOptions: MessageReturn) => {
+      this.listUser = returnOptions.objectsReturn;
+
+    });
+
   }
 
   putPositionTask(listTask: Array<ExecutionTask>): void {
@@ -55,7 +69,6 @@ export class TaskBoardComponent implements OnInit {
 
     });
   }
-
 
   putExecutionTask(): void {
 
@@ -69,6 +82,7 @@ export class TaskBoardComponent implements OnInit {
     task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
     task.colorBackground = this.taskForm.value.colorBackground;
     task.colorText = this.taskForm.value.colorText;
+    task.idUser = parseInt(this.taskForm.value.idUser);
 
     this._executionTaskService.putExecutionTask(task).subscribe((returnPutExecutionTask: MessageReturn) => {
 
@@ -113,6 +127,8 @@ export class TaskBoardComponent implements OnInit {
 
   openModal(modal: string, idTask: string): void {
 
+    this.getUserAll(1, 100);
+
     if (modal === 'addTask') {
 
       this.changeTask = false;
@@ -140,6 +156,8 @@ export class TaskBoardComponent implements OnInit {
 
   getExecutionTask(idTask: string): void {
 
+    this.getUserAll(1, 100);
+    
     this._executionTaskService.getExecutionTask(idTask).subscribe((returnTask: MessageReturn) => {
 
       this.taskForm.patchValue({
@@ -150,7 +168,8 @@ export class TaskBoardComponent implements OnInit {
         status: returnTask.objectsReturn.idStatus,
         description: returnTask.objectsReturn.description,
         colorBackground: returnTask.objectsReturn.colorBackground,
-        colorText: returnTask.objectsReturn.colorText
+        colorText: returnTask.objectsReturn.colorText,
+        idUser: returnTask.objectsReturn.idUser
       });
 
     });
@@ -178,6 +197,7 @@ export class TaskBoardComponent implements OnInit {
     task.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
     task.colorBackground = this.taskForm.value.colorBackground;
     task.colorText = this.taskForm.value.colorText;
+    task.idUser = parseInt(this.taskForm.value.idUser);
 
     this._executionTaskService.addTaskProject(task).subscribe((returnExecutionTask: MessageReturn) => {
 
