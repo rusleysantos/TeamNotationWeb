@@ -65,7 +65,8 @@
 } 
 
 .text-task-body {
-  width: 90%;
+  width: 95%;
+  margin-left: 5px;
   text-align: justify;
 } 
 

@@ -44,7 +44,7 @@ export class AnnotationBoardComponent implements OnInit {
     this.getNotations();
     this.notationChange = false;
   }
-  
+
   openModal(): void {
 
     this.notationChange = false;
@@ -57,7 +57,7 @@ export class AnnotationBoardComponent implements OnInit {
       colorText: "",
       idTask: ""
     });
-    
+
     this.getTasksProject(parseInt(this._cookieService.get('PROJECT_SELECT')), 1, 100);
 
   }
@@ -89,26 +89,31 @@ export class AnnotationBoardComponent implements OnInit {
 
   addNotation(): void {
 
+    debugger;
     this.notationChange = false;
 
     const notation = new Annotation;
     notation.title = this.notationForm.value.title;
     notation.description = this.notationForm.value.description;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
-    notation.positionCard = "translate3d(6px, -803px, 0px)";
+    notation.positionCard = "";
     notation.colorBackground = this.notationForm.value.colorBackground;
     notation.colorText = this.notationForm.value.colorText;
-    notation.idTask = this.notationForm.value.idTask != null ? parseInt(this.notationForm.value.idTask) : 0
+
+    if (this.notationForm.value.idTask !== undefined || "") {
+      notation.idTask = 0;
+    }
+    else {
+      notation.idTask = this.notationForm.value.colorText;
+    }
 
     this._notationService.addNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
       if (returnNotation.status) {
-
         Swal.fire(
           returnNotation.title,
           returnNotation.description,
-          'success'
-        )
+          'success')
         this.ngOnInit();
 
         this.notationForm.patchValue({
@@ -118,19 +123,14 @@ export class AnnotationBoardComponent implements OnInit {
           colorBackground: "",
           colorText: ""
         });
-
-
       }
       else {
-
         Swal.fire(
           returnNotation.title,
           returnNotation.description,
-          'error'
-        )
+          'error')
       }
     });
-
   }
 
   getNotations(): void {
@@ -152,7 +152,7 @@ export class AnnotationBoardComponent implements OnInit {
         description: returnNotation.objectsReturn.description,
         colorBackground: returnNotation.objectsReturn.colorBackground,
         colorText: returnNotation.objectsReturn.colorText,
-        idTask:  returnNotation.objectsReturn.idTask
+        idTask: returnNotation.objectsReturn.idTask
       });
 
     });
@@ -170,7 +170,7 @@ export class AnnotationBoardComponent implements OnInit {
     notation.colorBackground = this.notationForm.value.colorBackground;
     notation.colorText = this.notationForm.value.colorText;
     notation.idTask = this.notationForm.value.idTask != undefined ? parseInt(this.notationForm.value.idTask) : 0;
-    
+
 
     this._notationService.putNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
@@ -231,25 +231,18 @@ export class AnnotationBoardComponent implements OnInit {
 
   changeNotationPosition(idAnnotation: number, messageEl: any): void {
 
-    const element = messageEl
-      .getAttribute('style')
+    const element = messageEl.getAttribute('style')
       .replaceAll('transform: ', '')
       .replaceAll(';', '');
 
-    //TODO: ele está pegando todos os estilos e separando apenas o referente a posicionamento, encontrar melhor forma
-    const elementTransform = element.substring(element.indexOf("translate3d"), element.lastIndexOf(")") + 1);
-
     const notation = new Annotation;
     notation.idAnnotation = idAnnotation;
-    notation.positionCard = elementTransform;
+    notation.positionCard = element;
     notation.idProject = parseInt(this._cookieService.get('PROJECT_SELECT'));
     //notation.positionCard = element.style.fontSize;
 
     this._notationService.putNotation(notation).subscribe((returnNotation: MessageReturn) => {
 
     });
-
-
   }
-
 }

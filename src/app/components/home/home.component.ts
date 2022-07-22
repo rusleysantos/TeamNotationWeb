@@ -9,17 +9,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  flagImageHome: boolean = false;
   constructor(private _router: Router, private _cookieService: CookieService) { }
 
   ngOnInit(): void {
-
     const token = this._cookieService.get('TOKEN_USER');
+    const path = window.location.pathname
 
-    if ( token === null || token === undefined || token === "") {
+    if (token === null || token === undefined || token === "") {
 
       this._router.navigate(['/']);
     }
-  }
 
+    if (!path.includes("content")) {
+      this.flagImageHome = true;
+    }
+    else{
+      this.flagImageHome = false;
+    }
+  }
 }
